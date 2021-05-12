@@ -1,6 +1,30 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %}   
 {% block main_container%}
-<h1>This is the Login page</h1>
-
-
+{# create the registration form#}
+<form method="POST">
+    <h3 align="center">Login</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            placeholder="Enter e-mail"
+        >
+    </div>
+    <div class="form-group">    
+        <label for="firstName">Enter Password</label>   
+        <input 
+            type="password" 
+            class="form-control" 
+            id="password1" 
+            name="password" 
+            placeholder="Enter password"
+         >
+    </div>
+    <br />
+    {# The button to submit the form is seperated by a line break#}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
 {% endblock%}

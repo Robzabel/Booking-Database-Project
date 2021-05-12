@@ -33,6 +33,29 @@
                 </div>
             </div>
         </nav>
+        <!--jinja code for handling the flash messages-->
+        {% with messages = get_flashed_messages(with_categories=true) %} <!--Create a context mangaer-->
+        {% if messages %} <!--Check if there are flashes in the messages variable-->
+            {%for category, message in messages %} <!--Loop through all messages deconstrucing the category variable from the message-->
+            {% if category == 'error' %} <!--Check if the category is an error message-->
+            <div class="alert alert-danger alert-dismissable fade show" role="alert"> <!--use the bootstrap tags for a red alert message-->
+                {{ message }} <!--insert the mmessage that has the category of error on each iteration-->
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <!--bootstrap for a close button-->
+                    <span aria-hidden="true">&times;</span><!--the &times; defines the X button to use to close the alert-->
+                </button>
+            </div>
+            {% else %}<!--if the category is not an error, it must be a success-->
+            <div class="alert alert-success alert-dismissable fade show" role="alert"> <!--use the bootstrap tags for a green success message-->
+                {{ message }} <!--insert the mmessage that has the category of success on each iteration-->
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <!--bootstrap for a close button-->
+                    <span aria-hidden="true">&times;</span><!--the &times; defines the X button to use to close the alert-->
+                </button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <!--Container for main page content-->
         <div class="container" id="main_container">
             {% block main_container%}
