@@ -1,10 +1,14 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, session
 
 #Create a blueprint for the authentication view
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods = ['GET', 'POST'])
 def login():
+    #Fetch submitted form data
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
     return render_template('login.html')
 
 
@@ -15,6 +19,7 @@ def logout():
 
 @auth.route('/register', methods = ['GET', 'POST'])
 def register():
+    #Fetch submitted form data
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('first_name')

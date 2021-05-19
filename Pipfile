@@ -10,6 +10,8 @@ flask-sqlalchemy = "*"
 python-dotenv = "*"
 mysql-connector = "*"
 mysql-connector-python = "*"
+wheel = "*"
+flask-mysqldb = "*"
 
 [dev-packages]
 
