@@ -1,15 +1,15 @@
 from flask import Flask
 from config import Config
-from flask_sqlalchemy import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 """
 Create the App Factory 
 """
 #Initialise the objects
-db = sqlalchemy()
+db = SQLAlchemy()
 
 #Method to create an instance of the application
 def create_app():
-    
+
     #Initialise the app 
     app = Flask(__name__)
     app.secret_key = Config.SECRET_KEY
@@ -18,6 +18,7 @@ def create_app():
 
     #Initialise the Databade 
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.DATABASE_STRING
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
   
