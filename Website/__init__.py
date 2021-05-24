@@ -17,12 +17,18 @@ def create_app():
     app.testing = Config.TESTING 
     app.debug = Config.DEBUG
 
-    #Initialise the Databade 
+
+    #Initialise the Database object peramaters 
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.DATABASE_STRING
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
+    
 
-  
+    #Initialise the databse models
+    from .models import create_database
+    create_database(app)
+
+
     #Initialise the blueprints
     from .views import views
     from .auth import auth
@@ -30,10 +36,11 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+
     #Return the app to the calling function
     return app
 
-  
+
 
 
 

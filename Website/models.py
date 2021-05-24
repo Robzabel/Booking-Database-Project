@@ -14,31 +14,40 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(50))
+    booking = db.relationship('Booking')
 
     
     def __repr__(self):
         return f"<User {self.first_name}>"
+
 
 #Create the booking model
 class Booking(db.Model):
     __tablename__ = 'bookings'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    restaurant_id = db.Column(db.Integer, db.ForeighKey('resteraunts.id'))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
     booking_date = db.Column(db.Date)
     booking_time = db.Column(db.Time)
     number_of_guests = db.Column(db.Integer, nullable=False)
     dietary_requirements = db.Column(db.String(150))
 
     def __repr__(self):
-        return f"<Booking {self.id}"
+        return f"<Booking {self.id}>"
+
 
 #Create the restaurant model
 class Restaurant(db.Model):
     __tablename__ = 'restaurants'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Colums(db.String(50))
-    location = db.Colums(db.String(50))
+    name = db.Column(db.String(50))
+    location = db.Column(db.String(50))
+    booking = db.relationship('Booking')
 
     def __repr__(self):
-        return f"<Restaurant {self.name}"
+        return f"<Restaurant {self.name}>"
+
+#define a function that can be imported to create the database 
+def create_database(app):
+    db.create_all(app=app)
+    print("created Database")
