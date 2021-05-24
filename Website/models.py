@@ -1,4 +1,3 @@
-from enum import unique
 from . import db
 from flask_login import UserMixin
 
@@ -10,10 +9,10 @@ Create the tables for the database with SQLAlchemy models
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50))
-    last_name = db.Column(db.String(50))
+    firstName = db.Column(db.String(50))
+    lastName = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(50))
+    password = db.Column(db.String(150))
     booking = db.relationship('Booking')
 
     
@@ -25,12 +24,12 @@ class User(db.Model, UserMixin):
 class Booking(db.Model):
     __tablename__ = 'bookings'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
-    booking_date = db.Column(db.Date)
-    booking_time = db.Column(db.Time)
-    number_of_guests = db.Column(db.Integer, nullable=False)
-    dietary_requirements = db.Column(db.String(150))
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    restaurantId = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
+    bookingDate = db.Column(db.Date)
+    bookingDime = db.Column(db.Time)
+    numberOfGuests = db.Column(db.Integer, nullable=False)
+    dietaryRequirements = db.Column(db.String(150))
 
     def __repr__(self):
         return f"<Booking {self.id}>"
@@ -49,5 +48,6 @@ class Restaurant(db.Model):
 
 #define a function that can be imported to create the database 
 def create_database(app):
+    #db.drop_all(app=app)
     db.create_all(app=app)
     print("created Database")

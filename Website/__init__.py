@@ -1,6 +1,7 @@
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 """
 Create the App Factory 
@@ -25,7 +26,7 @@ def create_app():
     
 
     #Initialise the databse models
-    from .models import create_database
+    from .models import create_database, User
     create_database(app)
 
 
@@ -36,6 +37,15 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+
+    #Initialise the Login Manager & define the user_loader
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(id):
+	    return User.query.get(int(id))
 
     #Return the app to the calling function
     return app
