@@ -1,10 +1,11 @@
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
+
 """
 Create the App Factory 
 """
-#Initialise the objects
+#Initialise the db object
 db = SQLAlchemy()
 
 #Method to create an instance of the application

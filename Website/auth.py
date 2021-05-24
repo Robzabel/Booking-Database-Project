@@ -1,5 +1,9 @@
 from flask import Blueprint, render_template, request, flash, session
 
+
+"""
+Create views that require authenitication
+"""
 #Create a blueprint for the authentication view
 auth = Blueprint('auth', __name__)
 

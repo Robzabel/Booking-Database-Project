@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template
 
+"""
+Create views that dont require authentication
+"""
 
 #create the object of blueprint that defines the site views, call it the same as the filename for clarity
 views = Blueprint('views', __name__) 

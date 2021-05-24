@@ -1,6 +1,9 @@
 from dotenv import load_dotenv, find_dotenv
 import os
 
+"""
+Create a Config class to hold global variables
+"""
 #locate the .env file
 load_dotenv(find_dotenv())
 
