@@ -1,9 +1,41 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}   
 {% block main_container%}
-<h1>This is the home page this will contain the dates available to book and allow you to make your booking from here</h1>
-<h1>The page should alo have a capacity chart for the dayof the week and the month</h1>
-<h1>If the user is not logged in ask them to register</h1>
+<br/>
+<br/>
 <div>
+    <div class="container">
+        <div class="row">
+        <div class="col-md">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ r1_card.name }}</h5>
+                    <p class="card-text">Restaurant is located in {{ r1_card.location }}. Type of Cuisine... <br> Specialities...</p>
+                    <a href="#" class="btn btn-primary">Go to Website</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ r2_card.name }}</h5>
+                    <p class="card-text">Restaurant is located in {{ r2_card.location }}. Type of Cuisine... <br> Specialities...</p>
+                    <a href="#" class="btn btn-primary">Go to Website</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ r3_card.name }}</h5>
+                    <p class="card-text">Restaurant is located in {{ r3_card.location }}. Type of Cuisine... <br> Specialities...</p>
+                    <a href="#" class="btn btn-primary">Go to Website</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <br />
+    <br />
     <form method="POST">
         <h3 align="center">Make a Booking</h3>
         <div class="form-group">

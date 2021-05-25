@@ -1,5 +1,46 @@
 {% extends "base.html" %} {% block title %}Make A Booking{% endblock %}   
 {% block main_container%}
-<h1 align="centre">Your Bookings:</h1>
+<h3 align="center">Your Bookings</h3>
 
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Reference</th>
+        <th scope="col">Restaurant</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Guests</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <h2>Choose a Booking to Modify:</h2>
+  <select class="form-control form-control-lg">
+    <option>Booking reference number</option>
+  </select>
+  <br />
+  <button type="button" class="btn btn-primary btn-lg">Edit</button>
+  <button type="button" class="btn btn-danger btn-lg">Delete</button>
+ 
 {% endblock%}

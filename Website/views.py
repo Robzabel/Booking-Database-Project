@@ -14,9 +14,17 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
+    #SQLAlchemy queries to make objects for the homepage cards
+    r1_card = Restaurant.query.filter_by(id="1").first()
+    r2_card = Restaurant.query.filter_by(id="2").first()
+    r3_card = Restaurant.query.filter_by(id="3").first()
+    
+    #Initialise the restaurant and user objects
     restaurants = Restaurant.query.all()
     user = current_user
     
+    #Fetch the information about the booking
     if request.method == 'POST':
         #Get the user ID from the current_user 
         user_id = user.id
@@ -32,12 +40,16 @@ def home():
         num_of_guests = request.form.get('number_of_guests')
         comment = request.form.get('comment')
         
+        #Input the information into the database
         new_booking = Booking(userId=user_id, restaurantId=restaurant_id, bookingDate=booking_date, bookingTime=booking_time, numberOfGuests=num_of_guests, dietaryRequirements=comment )
         db.session.add(new_booking)
         db.session.commit()
+
+        #Flash a success message and takethe user to their manage bookings page
+        flash("You booking was successfully created!")
         return redirect(url_for('views.booking'))  
 
-    return render_template("home.html", user=current_user, restaurants=restaurants)
+    return render_template("home.html", user=current_user, restaurants=restaurants, r1_card=r1_card, r2_card=r2_card, r3_card=r3_card)
 
 
     
