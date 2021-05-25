@@ -67,7 +67,7 @@ def register():
             new_user = User(email=email, firstName=first_name, lastName=last_name, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user)
+            login_user(new_user) #log the new user in once their details are corrrect
             flash('You are now registered.', category='success')
             return redirect(url_for('views.home'))#redirects the user to the home route of the view blueprint
 

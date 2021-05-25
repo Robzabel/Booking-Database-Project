@@ -27,7 +27,7 @@ class Booking(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     restaurantId = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
     bookingDate = db.Column(db.Date)
-    bookingDime = db.Column(db.Time)
+    bookingTime = db.Column(db.Time)
     numberOfGuests = db.Column(db.Integer, nullable=False)
     dietaryRequirements = db.Column(db.String(150))
 
