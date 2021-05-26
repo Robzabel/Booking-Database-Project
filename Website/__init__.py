@@ -22,7 +22,7 @@ def create_app():
     #Initialise the Database object peramaters 
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.DATABASE_STRING
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_ECHO'] = True #used for testing to see the SQL commands being run
+    app.config['SQLALCHEMY_ECHO'] = False #used for testing to see the SQL commands being run
     db.init_app(app)
     
 
@@ -43,10 +43,13 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    
+    
     #Query the DB for user details based on the ID so the user doenst need to
     @login_manager.user_loader
     def load_user(id):
 	    return User.query.get(int(id))
+
 
     #Return the app to the calling function
     return app

@@ -58,9 +58,12 @@ def home():
 @views.route('/manage', methods=['GET', 'POST'])
 @login_required
 def booking():
-
+    #make an object of the current user
     user = current_user
+    #Fetch the user's bookings from the DB
     user_bookings = Booking.query.filter_by(userId=user.id).all()
+
+    #If the user cancels a booking, delete it from the database
     if request.method == 'POST':
         booking_id = request.form.get('cancel_booking')
         booking_to_cancel = Booking.query.get(booking_id)
