@@ -22,6 +22,7 @@ def create_app():
     #Initialise the Database object peramaters 
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.DATABASE_STRING
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True #used for testing to see the SQL commands being run
     db.init_app(app)
     
 

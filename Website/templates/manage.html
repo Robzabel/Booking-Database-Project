@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %}Make A Booking{% endblock %}   
+{% extends "base.html" %} {% block title %}Manage Bookings{% endblock %}   
 {% block main_container%}
+<br />
 <h3 align="center">Your Bookings</h3>
 
 <table class="table">
@@ -14,33 +15,42 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      {% if user_bookings %}
+        {% for booking in user_bookings %}
+        <tr>
+          <th scope="row">{{ booking.id }}</th>
+         {% if booking.restaurantId == 1 %}
+            <td>Restaurant 1</td>
+          {% elif booking.restaurantId == 2 %}
+           <td>Restaurant 2</td>
+          {% elif booking.restaurantId == 3 %}
+            <td>Restaurant 3</td>
+         {% endif %}
+          <td>{{booking.bookingDate}}</td>
+          <td>{{booking.bookingTime}}</td>
+          <td>{{booking.numberOfGuests}}</td>
+          <td>{{booking.dietaryRequirements}}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        </tbody>
+        </table>
+        <p>You do not have any reservations</p>
+      {% endif %}
     </tbody>
   </table>
-  <br/>
-  <h2>Choose a Booking to Modify:</h2>
-  <select class="form-control form-control-lg">
-    <option>Booking reference number</option>
-  </select>
-  <br />
-  <button type="button" class="btn btn-primary btn-lg">Edit</button>
-  <button type="button" class="btn btn-danger btn-lg">Delete</button>
- 
+  <form method="POST">
+    <h2>Choose a Booking to Cancel:</h2>
+    <select 
+      class="form-control form-control-lg"
+      id="cancel_booking"
+      name="cancel_booking"
+      placeholder="Choose Booking">
+      {% for booking in user_bookings %}
+        <option>{{booking.id}}</option>
+      {% endfor %}
+    </select>
+    <br />
+    <button type="submit" class="btn btn-danger btn-lg">Cancel Booking</button>
+  </form>
 {% endblock%}

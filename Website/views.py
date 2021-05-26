@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Restaurant, Booking
 from . import db
-from datetime import date
+
 
 """
 Create views that dont require authentication
@@ -55,7 +55,20 @@ def home():
     
 
 
-@views.route('/manage')
+@views.route('/manage', methods=['GET', 'POST'])
 @login_required
 def booking():
-    return render_template("manage.html", user=current_user)
+
+    user = current_user
+    user_bookings = Booking.query.filter_by(userId=user.id).all()
+    if request.method == 'POST':
+        booking_id = request.form.get('cancel_booking')
+        booking_to_cancel = Booking.query.get(booking_id)
+        if booking_to_cancel:
+            db.session.delete(booking_to_cancel)
+            db.session.commit()
+            return redirect(url_for('views.booking'))
+
+  
+    return render_template("manage.html", user=current_user, user_bookings=user_bookings)
+    
